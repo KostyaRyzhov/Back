@@ -4,9 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Products")
@@ -16,7 +14,7 @@ public class Products extends PanacheEntity {
     private int product_id;
 
     @Column(name = "product_name")
-    private String name;
+    private String product_name;
 
     @Column(name = "product_price")
     private int product_price;
@@ -27,8 +25,8 @@ public class Products extends PanacheEntity {
     public Products() {
     }
 
-    public Products(String name, int id, int product_price, String product_color) {
-        this.name = name;
+    public Products(String product_name, int id, int product_price, String product_color) {
+        this.product_name = product_name;
         this.product_id = id;
         this.product_price = product_price;
         this.product_color = product_color;
@@ -42,12 +40,12 @@ public class Products extends PanacheEntity {
         this.product_id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProduct_name() {
+        return product_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
     }
 
     public int getProduct_price() {

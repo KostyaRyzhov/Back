@@ -30,6 +30,7 @@ public class GreetingResource {
     UriInfo uriInfo;
 
     @POST
+    @Path("/post")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response getObject(@Valid List<Products> products) {
@@ -60,7 +61,7 @@ public class GreetingResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Products> find(@Valid Products products) {
         Query query = em.createQuery("select p from Products p where p.product_id = ?2 and p.product_price = ?3 or p.name like ?1 and p.product_color like ?4");
-        query.setParameter(1, "%"+products.getName()+"%");
+        query.setParameter(1, "%"+products.getProduct_name()+"%");
         query.setParameter(2, products.getId());
         query.setParameter(3, products.getProduct_price());
         query.setParameter(4, "%"+products.getProduct_color()+"%");
