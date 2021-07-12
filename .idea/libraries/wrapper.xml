@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="wrapper">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../Jakson/code-with-quarkus/.mvn/wrapper" />
+      <root url="file://$PROJECT_DIR$/../../Jakson/code-with-quarkus/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../../Jakson/code-with-quarkus/src/test/java" />
+    </SOURCES>
+  </library>
+</component>

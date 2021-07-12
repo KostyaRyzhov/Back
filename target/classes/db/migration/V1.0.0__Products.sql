@@ -1,0 +1,10 @@
+-- Schema
+
+DROP TABLE IF EXISTS products;
+
+CREATE TABLE products (
+  id   SERIAL PRIMARY KEY,
+  name VARCHAR(30)
+);
+CREATE INDEX product_name ON products (last_name);
+CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 1000 INCREMENT BY 42;

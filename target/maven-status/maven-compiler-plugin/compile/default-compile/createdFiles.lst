@@ -1,0 +1,4 @@
+org/acme/Main.class
+META-INF/panache-archive.marker
+org/acme/GreetingResource.class
+org/acme/Products.class
