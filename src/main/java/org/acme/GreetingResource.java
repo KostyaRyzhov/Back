@@ -33,18 +33,15 @@ public class GreetingResource {
     @Path("/post")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response getObject(@Valid List<Products> products) {
-        objectLinkedList = products;
-        for (Products products1 : products) {
-            products1.persist();
-        }
+    public Response getObject(@Valid Products products) {
+            products.persist();
         return null;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Products> getAll() throws Exception {
-        Query query = em.createQuery("select p from Products p where p.name like '%'");
+        Query query = em.createQuery("select p from Products p where p.productName like '%'");
         return (List<Products>) query.getResultList();
     }
 
@@ -60,18 +57,18 @@ public class GreetingResource {
     @Path("/find")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Products> find(@Valid Products products) {
-        Query query = em.createQuery("select p from Products p where p.product_id = ?2 and p.product_price = ?3 or p.name like ?1 and p.product_color like ?4");
-        query.setParameter(1, "%"+products.getProduct_name()+"%");
+        Query query = em.createQuery("select p from Products p where p.productId = ?2 and p.productPrice = ?3 or p.productName like ?1 and p.productColor like ?4");
+        query.setParameter(1, "%"+products.getProductName()+"%");
         query.setParameter(2, products.getId());
-        query.setParameter(3, products.getProduct_price());
-        query.setParameter(4, "%"+products.getProduct_color()+"%");
+        query.setParameter(3, products.getProductPrice());
+        query.setParameter(4, "%"+products.getProductColor()+"%");
         return (List<Products>)query.getResultList();
     }
-
+    @Path("{id}/delete")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public void delSubStr() {
-
+    public void delSubStr(@PathParam long id) {
+        Query query = em.createQuery("delete p from Products p where p.product_id = id");
     }
 
     private String helloString() {
