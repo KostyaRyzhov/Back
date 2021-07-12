@@ -64,14 +64,26 @@ public class GreetingResource {
         query.setParameter(4, "%"+products.getProductColor()+"%");
         return (List<Products>)query.getResultList();
     }
-    @Path("{id}/delete")
-    @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
-    public void delSubStr(@PathParam long id) {
-        Query query = em.createQuery("delete p from Products p where p.product_id = id");
+    @POST
+    @Path("/delete")
+    @Transactional
+    public void delSubStr(@Valid Long id) {
+        Products p = em.find(Products.class, id);
+        em.remove(p);
     }
 
-    private String helloString() {
-        return "hello";
+    @POST
+    @Path("/update/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public void updateElement(@Valid Products products, @PathParam Long id){
+        //Products p = getOne(Long.valueOf(products.getId()));
+        Products p = getOne(id);
+        p.setId(products.getId());
+        p.setProductName(products.getProductName());
+        p.setProductPrice(products.getProductPrice());
+        p.setProductColor(products.getProductColor());
+        //p.persist();
+        em.persist(p);
     }
 }
