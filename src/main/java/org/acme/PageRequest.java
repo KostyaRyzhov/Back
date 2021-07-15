@@ -1,31 +1,32 @@
 package org.acme;
 
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.QueryParam;
-
 public class PageRequest {
 
-    @QueryParam("pageNum")
-    @DefaultValue("0")
-    private int pageNum;
+    private int offset;
 
-    @QueryParam("pageSize")
-    @DefaultValue("10")
-    private int pageSize;
+    private int elCount;
 
     public PageRequest() {
     }
 
-    public PageRequest(int pageNum, int pageSize) {
-        this.pageNum = pageNum;
-        this.pageSize = pageSize;
+    public PageRequest(int offset, int elCount) {
+        this.offset = offset;
+        this.elCount = elCount;
     }
 
-    public int getPageNum() {
-        return pageNum;
+    public int getOffset() {
+        return offset;
     }
 
-    public int getPageSize() {
-        return pageSize;
+    public int getElCount() {
+        return elCount;
+    }
+
+    public void setElCount(int elCount) {
+        this.elCount = elCount;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }

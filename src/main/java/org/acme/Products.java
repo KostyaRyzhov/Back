@@ -1,6 +1,10 @@
 package org.acme;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.Filters;
+import org.hibernate.annotations.ParamDef;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +12,40 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Products")
+@FilterDef(name="productFilterId", parameters={
+        @ParamDef( name="thisId", type="integer" ),
+})
+@FilterDef(name="productFilterMinId", parameters={
+        @ParamDef( name="minId", type="integer" )
+})
+@FilterDef(name="productFilterMaxId", parameters={
+        @ParamDef( name="maxId", type="integer" )
+})
+@FilterDef(name = "productFilterName", parameters = {
+        @ParamDef(name = "thisName", type="string")
+})
+@FilterDef(name = "productFilterPrice", parameters = {
+        @ParamDef(name = "thisPrice", type="integer"),
+})
+@FilterDef(name = "productFilterMaxP", parameters = {
+        @ParamDef( name="maxPrice", type="integer" ),
+})
+@FilterDef(name = "productFilterMinP", parameters = {
+        @ParamDef( name="minPrice", type="integer" ),
+})
+@FilterDef(name = "productFilterColor", parameters = {
+        @ParamDef(name = "thisColor", type="string")
+})
+@Filters( {
+        @Filter(name = "productFilterId", condition = ":thisId = product_id"),
+        @Filter(name = "productFilterMinId", condition = ":minId < product_id"),
+        @Filter(name = "productFilterMaxId", condition = ":maxId > product_id"),
+        @Filter(name = "productFilterName", condition = "product_name like :thisName"),
+        @Filter(name = "productFilterPrice", condition = ":thisPrice = product_price"),
+        @Filter(name = "productFilterMinP", condition = ":minPrice < product_price"),
+        @Filter(name = "productFilterMaxP", condition = ":maxPrice > product_price"),
+        @Filter(name = "productFilterColor", condition = "product_color like :thisColor")
+} )
 public class Products extends PanacheEntity {
 
     @Column(name = "product_id")

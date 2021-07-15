@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
-import java.util.List;
 import java.util.function.Function;
 
 public class ResourceSupport {
@@ -26,7 +25,7 @@ public class ResourceSupport {
 
     public static Response getAll(PageRequest pageRequest, PanacheRepository repository) {
         return Response.ok(repository.findAll()
-                .page(Page.of(pageRequest.getPageNum(), pageRequest.getPageSize()))
+                .page(Page.of(pageRequest.getOffset(), pageRequest.getElCount()))
                 .list()).build();
     }
 
