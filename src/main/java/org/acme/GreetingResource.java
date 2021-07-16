@@ -3,7 +3,6 @@ package org.acme;
 import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -15,18 +14,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
 import static java.lang.Math.min;
 
 
 @Path(GreetingResource.path)
 public class GreetingResource {
     public static final String path = "/hello";
-    private String string;
-    private List<Products> objectLinkedList = new LinkedList<Products>();
-
     @Inject
     EntityManager em;
 
@@ -94,14 +88,6 @@ public class GreetingResource {
         //p.persist();
         em.persist(p);
     }
-
-    /*@POST
-    @Path("/filter")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public List<Products> filterH(@Valid Products products) {
-        return null;
-    };*/
 
     @POST
     @Path("/getPage")
