@@ -1,13 +1,15 @@
 package org.acme;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
 import javax.persistence.*;
 
 @Entity
 @Table
-public class Judges {
+public class Judges extends PanacheEntity {
 
-    @ManyToMany
-    @JoinColumn(name = "matchName")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "matchId")
     private Match match;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -7,13 +7,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Team")
 public class Team extends PanacheEntity {
-    @OneToMany(mappedBy= "Match")
+    @OneToMany(mappedBy= "team", cascade = CascadeType.ALL)
     @Column(name = "team_id")
     private int teamId;
     @Column(name = "team_name")
     private String teamName;
     @Column(name = "team_town")
     private String teamTown;
+
+    private Match match;
 
     public Team() {
 
@@ -23,6 +25,14 @@ public class Team extends PanacheEntity {
         this.teamId = teamId;
         this.teamName = teamName;
         this.teamTown = teamTown;
+    }
+
+    public Match getMatch() {
+        return match;
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
     }
 
     public int getTeamId() {
