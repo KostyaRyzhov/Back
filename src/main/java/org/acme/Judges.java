@@ -6,11 +6,11 @@ import javax.persistence.*;
 @Table
 public class Judges {
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "matchName")
     private Match match;
 
-    @OneToMany
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "judgeName")
     private Judge judge;
 
@@ -21,6 +21,8 @@ public class Judges {
         this.match = match;
         this.judge = judge;
     }
+
+
 
     public Match getMatch() {
         return match;
