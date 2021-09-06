@@ -1,12 +1,14 @@
 package org.acme;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Judge")
-public class Judge {
+public class Judge extends PanacheEntity {
 
     @Column(name = "judge_id")
     private int judgeId;

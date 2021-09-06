@@ -1,12 +1,16 @@
 package org.acme;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
+import org.wildfly.common.ref.References;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Match")
-public class Match {
+public class Match extends PageRequest {
     @Column(name = "match_id")
     private int matchId;
     @Column(name = "guest_id")
@@ -91,6 +95,5 @@ public class Match {
     public Match() {
 
     }
-
 
 }
