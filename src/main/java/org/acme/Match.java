@@ -3,20 +3,21 @@ package org.acme;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import org.wildfly.common.ref.References;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Match")
 public class Match extends PageRequest {
     @Column(name = "match_id")
     private int matchId;
-    @Column(name = "guest_id")
-    private int guestId;
-    @Column(name = "master_id")
-    private int masterId;
+    @ManyToOne
+    // @Column(name = "guest_id")
+    @JoinColumn(name = "guestId")
+    private Team teamG;
+    //@Column(name = "master_id")
+    @ManyToOne
+    @JoinColumn(name="masterId")
+    private Team teamM;
     @Column(name = "date")
     private String date;
     @Column(name = "time")
@@ -26,10 +27,8 @@ public class Match extends PageRequest {
     @Column(name = "guest_score")
     private int guestScore;
 
-    public Match(int matchId, int guestId, int masterId, String date, String time, int masterScore, int guestScore) {
+    public Match(int matchId, String date, String time, int masterScore, int guestScore) {
         this.matchId = matchId;
-        this.guestId = guestId;
-        this.masterId = masterId;
         this.date = date;
         this.time = time;
         this.masterScore = masterScore;
@@ -42,22 +41,6 @@ public class Match extends PageRequest {
 
     public void setMatchId(int matchId) {
         this.matchId = matchId;
-    }
-
-    public int getGuestId() {
-        return guestId;
-    }
-
-    public void setGuestId(int guestId) {
-        this.guestId = guestId;
-    }
-
-    public int getMasterId() {
-        return masterId;
-    }
-
-    public void setMasterId(int masterId) {
-        this.masterId = masterId;
     }
 
     public String getDate() {

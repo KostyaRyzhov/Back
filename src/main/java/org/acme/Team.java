@@ -2,13 +2,12 @@ package org.acme;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Team")
 public class Team extends PanacheEntity {
+    @OneToMany(mappedBy= "Match")
     @Column(name = "team_id")
     private int teamId;
     @Column(name = "team_name")
